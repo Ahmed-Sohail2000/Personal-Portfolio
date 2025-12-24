@@ -1,47 +1,41 @@
-# Picto - Personal Portfolio Free Template
+# Personal Portfolio - Ahmed Sohail
 
-#### Preview
+A personal portfolio showcasing my background, skills, projects, client testimonials, and contact information.
 
-- [Demo](https://themewagon.github.io/picto/)
+## Features
 
-#### Download
+- AI & Web Development Projects
+- Client Testimonials
+- Professional Profile & Skills
+- Contact via Email
 
-- [Download from ThemeWagon](https://themewagon.com/themes/picto)
+---
 
 ## Getting Started
 
-1. Clone Repository
-
-```
-git clone https://github.com/themewagon/picto.git
-```
-
-2. Install Dependencies
-
-```
-npm i
+1. **Clone the repository**
+```bash
+git clone https://github.com/Ahmed-Sohail2000/Personal-Portfolio.git
 ```
 
-3. Run the development server:
+2. Install dependencies
 
 ```bash
+Copy code
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+3. Run the development server
+
+```bash
+Copy code
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
-
-## Author
-
-```
-Developed by ThemeWagon and development team.
-```
-
-## License
-
-- Design and Code is Copyright &copy; <a href="http://themewagon.com/" target="_blank">ThemeWagon</a>
-- Licensed cover under [MIT]
-- Developed by <a href="http://themewagon.com/" target="_blank">ThemeWagon</a>
