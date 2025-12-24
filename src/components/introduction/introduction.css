@@ -1,0 +1,9 @@
+/* introduction.css */
+
+.introduction {
+    
+    background-color: white;  /* Change this to any color you want */
+    color: black;             /* Make sure text is visible on white background */
+    min-height: 100vh;        /* Optional: makes sure it covers the full screen */
+    padding: 20px;            /* Optional: spacing inside the container */
+}
