@@ -1,5 +1,4 @@
 import Form from "./Form";
-import SocialMedia from "../common/socialMedia/SocialMedia";
 
 const Contact = () => {
   return (
