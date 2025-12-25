@@ -5,82 +5,88 @@ const Form = () => {
 
   if (state.succeeded) {
     return (
-      <div className="text-center py-20 animate-fade-in">
-        <h3 className="text-3xl font-semibold text-[#001f3f] mb-4">
-          Message Sent 🚀
-        </h3>
-        <p className="text-gray-600">
-          Thanks for reaching out. I’ll get back to you shortly.
-        </p>
-      </div>
+      <p className="text-center text-lg font-semibold text-[#001f3f]">
+        Thank you! Your message has been sent.
+      </p>
     );
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow-xl rounded-2xl p-8 md:p-10 space-y-6"
+      className="space-y-6 bg-white"
     >
+      {/* Heading */}
       <h2 className="text-3xl font-bold text-[#001f3f] text-center mb-6">
-        Get in Touch
+        Contact Me
       </h2>
-
-      {/* Honeypot field (spam protection) */}
-      <input type="text" name="_gotcha" className="hidden" />
 
       {/* Name */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-[#001f3f] mb-2">
           Name
         </label>
         <input
           type="text"
           name="name"
           required
-          className="w-full rounded-lg border border-gray-300 px-4 py-3
-                     focus:outline-none focus:ring-2 focus:ring-[#001f3f]"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg
+                     text-[#001f3f] focus:outline-none focus:ring-2
+                     focus:ring-[#001f3f]"
         />
       </div>
 
       {/* Email */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-[#001f3f] mb-2">
           Email
         </label>
         <input
           type="email"
           name="email"
           required
-          className="w-full rounded-lg border border-gray-300 px-4 py-3
-                     focus:outline-none focus:ring-2 focus:ring-[#001f3f]"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg
+                     text-[#001f3f] focus:outline-none focus:ring-2
+                     focus:ring-[#001f3f]"
         />
-        <ValidationError prefix="Email" field="email" errors={state.errors} />
+        <ValidationError
+          prefix="Email"
+          field="email"
+          errors={state.errors}
+          className="text-red-500 text-sm"
+        />
       </div>
 
       {/* Message */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-[#001f3f] mb-2">
           Message
         </label>
         <textarea
           name="message"
           rows="5"
           required
-          className="w-full rounded-lg border border-gray-300 px-4 py-3
-                     focus:outline-none focus:ring-2 focus:ring-[#001f3f]"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg
+                     text-[#001f3f] focus:outline-none focus:ring-2
+                     focus:ring-[#001f3f]"
         />
-        <ValidationError prefix="Message" field="message" errors={state.errors} />
+        <ValidationError
+          prefix="Message"
+          field="message"
+          errors={state.errors}
+          className="text-red-500 text-sm"
+        />
       </div>
 
       {/* Submit */}
       <button
         type="submit"
         disabled={state.submitting}
-        className="w-full bg-[#001f3f] text-white font-semibold py-3 rounded-lg
-                   hover:bg-[#003366] transition-all duration-300
-                   disabled:opacity-60"
+        className="w-full bg-[#001f3f] text-white font-semibold
+                   py-3 rounded-lg hover:bg-[#003366]
+                   transition-colors duration-300"
       >
-        {state.submitting ? "Sending..." : "Send Message"}
+        Send Message
       </button>
     </form>
   );
