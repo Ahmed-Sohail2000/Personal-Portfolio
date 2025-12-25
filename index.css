@@ -1,56 +1,54 @@
-@import "tailwindcss";
-@plugin "daisyui";
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
-}
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-* {
-  transition-property: all;
-  transition-timing-function: var(
-    --tw-ease,
-    var(--default-transition-timing-function)
-  );
-  transition-duration: var(--tw-duration, var(--default-transition-duration));
-  --tw-duration: 200ms;
-  transition-duration: 200ms;
-}
-
-@theme {
-  --breakpoint-xxs: 21.25rem; /* COMMENT: 340px */
-  --breakpoint-xs: 23.125rem; /* COMMENT: 363px */
-  --breakpoint-xxl: 82.5rem; /* COMMENT: 1320px */
+/* Global Variables */
+:root {
+  --breakpoint-xxs: 21.25rem; /* 340px */
+  --breakpoint-xs: 23.125rem; /* 363px */
+  --breakpoint-xxl: 82.5rem;  /* 1320px */
   --color-picto-primary: #9929fb;
   --color-picto-primary-dark: #650fa0;
   --color-soft-white: #f0f1f3;
   --color-soft-dark: #87909d;
+  --tw-duration: 200ms;
 }
 
+/* Smooth Transitions */
+* {
+  transition-property: all;
+  transition-duration: var(--tw-duration);
+  transition-timing-function: ease-in-out;
+}
+
+/* DaisyUI Button Customization */
 .btn-primary {
   @apply bg-picto-primary border-0 text-white hover:scale-[102%] hover:bg-picto-primary-dark transition-all duration-500;
 }
 
+/* Body Font */
 body {
   font-family: "Work Sans", sans-serif;
 }
 
+/* Content Wrapper */
 .content {
-  @apply max-xxl:w-full xxl:max-w-[1320px] xxl:mx-auto;
+  @apply max-w-7xl w-full mx-auto;
 }
 
+/* Section Titles */
 .section-title {
   @apply md:font-semibold text-3xl sm:text-4xl md:text-5xl font-medium;
 }
 
+/* Centering Utility */
 .center {
   @apply flex justify-center items-center;
 }
 
-/* ✅ Changed gradient to pure white */
-.introduction-profile-background {
-  background-color: #ffffff;
-}
-
-/* ✅ Changed gradient to pure white */
+/* Background Overrides */
+.introduction-profile-background,
 .blog-background {
   background-color: #ffffff;
 }
