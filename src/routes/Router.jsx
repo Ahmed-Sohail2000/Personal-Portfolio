@@ -9,8 +9,6 @@ const Projects = lazy(() => import("../components/projects/Projects"));
 const Profession = lazy(() => import("../components/profession/Profession")); // Services
 const Contact = lazy(() => import("../components/contact/Contact"));
 
-const repoName = import.meta.env.VITE_REPO_NAME || "";
-
 export const router = createBrowserRouter(
   [
     {
@@ -33,7 +31,6 @@ export const router = createBrowserRouter(
             </Suspense>
           ),
         },
-       
         {
           path: "projects",
           element: (
@@ -64,6 +61,5 @@ export const router = createBrowserRouter(
         },
       ],
     },
-  ],
-  { basename: `/${repoName}` }
+  ]
 );
