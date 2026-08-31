@@ -1,92 +1,83 @@
 import { useForm, ValidationError } from "@formspree/react";
 
+const fieldClass =
+  "w-full rounded-[3px] border border-line-strong bg-raised px-3.5 py-3 text-[15px] text-ink outline-none transition-colors duration-150 ease-snap placeholder:text-ink-muted focus:border-accent";
+const labelClass =
+  "mb-2 block font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink-muted";
+
 const Form = () => {
   const [state, handleSubmit] = useForm("xojagqol");
 
   if (state.succeeded) {
     return (
-      <p className="text-center text-lg font-semibold text-[#001f3f]">
-        Thank you! Your message has been sent.
+      <p className="font-mono text-sm text-ink">
+        Thanks — your message has been sent. I&rsquo;ll be in touch.
       </p>
     );
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 bg-white"
-    >
-      {/* Heading */}
-      <h2 className="text-3xl font-bold text-[#001f3f] text-center mb-6">
-        Contact Me
-      </h2>
-
-      {/* Name */}
-      <div>
-        <label className="block text-sm font-medium text-[#001f3f] mb-2">
+    <form onSubmit={handleSubmit} className="max-w-xl">
+      <div className="mb-5">
+        <label htmlFor="name" className={labelClass}>
           Name
         </label>
         <input
+          id="name"
           type="text"
           name="name"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg
-                     text-[#001f3f] focus:outline-none focus:ring-2
-                     focus:ring-[#001f3f]"
+          placeholder="Your name"
+          className={fieldClass}
         />
       </div>
 
-      {/* Email */}
-      <div>
-        <label className="block text-sm font-medium text-[#001f3f] mb-2">
+      <div className="mb-5">
+        <label htmlFor="email" className={labelClass}>
           Email
         </label>
         <input
+          id="email"
           type="email"
           name="email"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg
-                     text-[#001f3f] focus:outline-none focus:ring-2
-                     focus:ring-[#001f3f]"
+          placeholder="you@company.com"
+          className={fieldClass}
         />
         <ValidationError
           prefix="Email"
           field="email"
           errors={state.errors}
-          className="text-red-500 text-sm"
+          className="mt-1 font-mono text-xs text-accent"
         />
       </div>
 
-      {/* Message */}
-      <div>
-        <label className="block text-sm font-medium text-[#001f3f] mb-2">
+      <div className="mb-6">
+        <label htmlFor="message" className={labelClass}>
           Message
         </label>
         <textarea
+          id="message"
           name="message"
           rows="5"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg
-                     text-[#001f3f] focus:outline-none focus:ring-2
-                     focus:ring-[#001f3f]"
+          placeholder="A few lines about what you need"
+          className={fieldClass}
         />
         <ValidationError
           prefix="Message"
           field="message"
           errors={state.errors}
-          className="text-red-500 text-sm"
+          className="mt-1 font-mono text-xs text-accent"
         />
       </div>
 
-      {/* Submit */}
       <button
         type="submit"
         disabled={state.submitting}
-        className="w-full bg-[#001f3f] text-white font-semibold
-                   py-3 rounded-lg hover:bg-[#003366]
-                   transition-colors duration-300"
+        className="inline-flex h-11 items-center justify-center gap-2 rounded-[3px] border border-transparent bg-ink px-6 font-mono text-[12.5px] font-medium uppercase tracking-[0.04em] text-surface transition-[transform,background-color,color] duration-150 ease-snap hover:-translate-y-px hover:bg-accent hover:text-white disabled:pointer-events-none disabled:opacity-60"
       >
-        Send Message
+        {state.submitting ? "Sending…" : "Send message →"}
       </button>
     </form>
   );

@@ -1,78 +1,86 @@
 import person from "../../assets/images/person.png";
-import "./introduction.css";
-import InformationSummary from "./InformationSummary";
+import Container from "../ui/Container";
+import Kicker from "../ui/Kicker";
+import Button from "../ui/Button";
+import Reveal from "../ui/Reveal";
 
-// Information summary data
-const informationSummaryData = [
-  {
-    id: 1,
-    title: "Experience",
-    description: "1+ Yrs",
-  },
-  {
-    id: 2,
-    title: "AI Projects",
-    description: "5+",
-  },
-  {
-    id: 3,
-    title: "Clients & Teams",
-    description: "5+",
-  },
+const credentials = [
+  { value: "1+ yrs", label: "building AI in production" },
+  { value: "6", label: "shipped projects" },
+  { value: "EE · CAPM", label: "engineering background" },
 ];
 
-const Introduction = () => {
-  return (
-    <section
-      id="introduction"
-      className="bg-white flex flex-col-reverse lg:flex-row items-center justify-between gap-10 pt-16 px-4 lg:px-0"
-    >
-      {/* Text Content */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-between text-center lg:text-left">
-        <div className="max-w-xl">
-          <h1 className="text-3xl sm:text-4xl xl:text-5xl font-semibold leading-tight text-[#001f3f]">
-            Hello, I’m <br />
-            <span className="block mt-2">Ahmed Sohail</span>
-          </h1>
+const Introduction = () => (
+  <section
+    id="introduction"
+    className="scroll-mt-24 bg-surface pb-16 pt-24 sm:pb-20 sm:pt-32"
+  >
+    <Container>
+      <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+        <div>
+          <Reveal>
+            <Kicker>AI Engineer — LLMs · Agents · Applied Intelligence</Kicker>
+          </Reveal>
 
-          <p className="text-sm sm:text-base lg:text-lg my-6 text-gray-600">
-            I’m an{" "}
-            <span className="font-semibold text-[#001f3f]">AI Engineer</span>{" "}
-            specializing in{" "}
-            <span className="font-semibold text-[#001f3f]">
-              Large Language Models (LLMs)
-            </span>
-            ,{" "}
-            <span className="font-semibold text-[#001f3f]">AI Agents</span>, and
-            intelligent systems. I build scalable, production-ready AI solutions
-            that automate workflows, enhance decision-making, and create
-            real-world impact.
-          </p>
+          <Reveal
+            as="h1"
+            delay={60}
+            className="mt-5 font-display text-[clamp(2.75rem,7vw,4rem)] font-semibold leading-[1.02] tracking-[-0.026em] text-ink"
+          >
+            Ahmed Sohail
+          </Reveal>
 
-        </div>
+          <span className="accent-bar mt-6 block h-1 w-28 origin-left bg-accent" />
 
-        {/* Summary Stats */}
-        <div className="mt-10 flex justify-center lg:justify-start">
-          <div className="grid grid-cols-3 gap-3">
-            {informationSummaryData.map((item) => (
-              <InformationSummary key={item.id} item={item} navy />
+          <Reveal
+            as="p"
+            delay={120}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft"
+          >
+            I design and ship large-language-model systems, autonomous agents,
+            and applied intelligent systems &mdash; from voice agents for grid
+            operators to machine learning for energy demand response.
+          </Reveal>
+
+          <Reveal delay={180} className="mt-8 flex flex-wrap gap-3">
+            <Button as="a" href="#projects" variant="primary">
+              View work &rarr;
+            </Button>
+            <Button as="a" href="/resume.pdf" download variant="ghost">
+              Download CV
+            </Button>
+          </Reveal>
+
+          <Reveal
+            delay={240}
+            className="mt-11 flex flex-wrap gap-x-10 gap-y-5 border-t border-line pt-6"
+          >
+            {credentials.map((c) => (
+              <div key={c.label} className="flex flex-col gap-1">
+                <span className="font-display text-[17px] font-semibold text-ink">
+                  {c.value}
+                </span>
+                <span className="font-mono text-[10.5px] tracking-[0.02em] text-ink-muted">
+                  {c.label}
+                </span>
+              </div>
             ))}
-          </div>
+          </Reveal>
         </div>
-      </div>
 
-      {/* Image */}
-      <div className="w-full lg:w-1/2 flex justify-center">
-        <div className="relative w-72 sm:w-80 xl:w-[420px] aspect-[4/5]">
+        <Reveal
+          delay={160}
+          className="relative aspect-[5/6] overflow-hidden rounded-[4px] border border-ink bg-surface-alt shadow-[6px_6px_0_var(--accent-soft)]"
+        >
           <img
-            className="w-full h-full object-cover rounded-3xl shadow-2xl bg-white"
             src={person}
-            alt="Ahmed Sohail portrait"
+            alt="Ahmed Sohail"
+            className="h-full w-full object-cover"
           />
-        </div>
+        </Reveal>
       </div>
-    </section>
-  );
-};
+    </Container>
+  </section>
+);
 
 export default Introduction;

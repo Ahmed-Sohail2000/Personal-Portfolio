@@ -1,70 +1,78 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules";
-import "./testimonial.css";
-import matt from "/src/assets/matt.jpg";
-import aj from "/src/assets/aj.jpg";
-import tanveer from "/src/assets/tanveer.jpg";
+import Section from "../ui/Section";
+import Container from "../ui/Container";
+import Kicker from "../ui/Kicker";
+import Reveal from "../ui/Reveal";
 
 const testimonialData = [
   {
     message:
-      "Outstanding professional goes above and beyond to satisfy his clients! We look forward to using Ahmed many more times in the future, Thanks!",
+      "Outstanding professional — goes above and beyond to satisfy his clients. We look forward to working with Ahmed many more times.",
     name: "Matt",
-    designation: "Australia",
-    avatar: matt,
+    location: "Australia",
   },
   {
-    message: "Great job, highly recommended",
-    name: "Tanveer Sengh",
-    designation: "Singapore",
-    avatar: tanveer,
+    message: "Great job, highly recommended. Clear communication throughout.",
+    name: "Tanveer Singh",
+    location: "Singapore",
   },
   {
     message:
       "Professional, reliable, and creative. Delivered on time with amazing results.",
     name: "AJ Caine",
-    designation: "United States",
-    avatar: aj,
+    location: "United States",
   },
 ];
 
-const Testimonial = () => {
-  return (
-    <div className="bg-gray-50 py-24 px-4 md:px-20">
-      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-        What Clients Say
-      </h2>
-      <Swiper
-        modules={[Autoplay, Pagination]}
-        loop={true}
-        autoplay={{ delay: 4000, disableOnInteraction: false }}
-        slidesPerView={1}
-        spaceBetween={40}
-        pagination={{ clickable: true }}
-        className="testimonial-swiper"
-      >
-        {testimonialData.map((t, index) => (
-          <SwiperSlide key={index}>
-            <div className="max-w-3xl mx-auto text-center p-10 md:p-16 bg-white shadow-2xl rounded-3xl">
-              <img
-                src={t.avatar}
-                alt={t.name}
-                className="w-28 h-28 md:w-32 md:h-32 mx-auto rounded-full mb-6"
-                style={{ border: "4px solid #001f3f" }} // Navy blue border
-              />
-              <p className="text-gray-700 italic text-lg md:text-xl mb-6">
-                "{t.message}"
-              </p>
-              <h3 className="font-semibold text-xl md:text-2xl">{t.name}</h3>
-              <p className="text-md md:text-lg text-gray-500">{t.designation}</p>
+const initials = (name) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+const Testimonial = () => (
+  <Section id="testimonials" alt>
+    <Container>
+      <Reveal className="mb-12 flex flex-col gap-4">
+        <Kicker>Words</Kicker>
+        <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
+          What people say
+        </h2>
+      </Reveal>
+
+      <div className="grid overflow-hidden rounded-[4px] border border-line sm:grid-cols-3">
+        {testimonialData.map((t, i) => (
+          <Reveal
+            key={t.name}
+            delay={i * 60}
+            className={`h-full bg-raised p-6 ${
+              i === testimonialData.length - 1
+                ? ""
+                : "border-b border-line sm:border-b-0 sm:border-r"
+            }`}
+          >
+            <p className="text-[15px] leading-relaxed text-ink">
+              &ldquo;{t.message}&rdquo;
+            </p>
+            <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
+              <span className="flex h-9 w-9 items-center justify-center rounded-[3px] border border-ink font-display text-xs font-semibold text-ink">
+                {initials(t.name)}
+              </span>
+              <span>
+                <span className="block font-display text-sm font-semibold text-ink">
+                  {t.name}
+                </span>
+                <span className="block font-mono text-[10.5px] text-ink-muted">
+                  {t.location}
+                </span>
+              </span>
             </div>
-          </SwiperSlide>
+          </Reveal>
         ))}
-      </Swiper>
-    </div>
-  );
-};
+      </div>
+    </Container>
+  </Section>
+);
 
 export default Testimonial;

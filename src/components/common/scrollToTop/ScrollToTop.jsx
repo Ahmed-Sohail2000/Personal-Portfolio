@@ -4,37 +4,26 @@ import { animateScroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ScrollToTop = () => {
-  const [position, setPosition] = useState(0);
-
-  const options = {
-    duration: 500,
-    smooth: true,
-  };
-
-  const scrollToTop = () => {
-    animateScroll.scrollToTop(options);
-  };
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setPosition(window.scrollY);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setVisible(window.scrollY > 240);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="flex justify-end relative sm:me-10 z-10 transition-all">
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-10 me-5 w-10 h-10 sm:w-12.5 sm:h-12.5 lg:w-15 lg:h-15 flex justify-center items-center rounded-full transition transform duration-500 ease-in-out hover:scale-125 hover:cursor-pointer text-white
-          ${
-            position < 200
-              ? "scale-0 opacity-0"
-              : "scale-100 opacity-100 bg-[#0b1f4b] hover:bg-[#162d5c]"
-          }`}
-      >
-        <FontAwesomeIcon icon={faAngleUp} size="2xl" />
-      </button>
-    </div>
+    <button
+      type="button"
+      aria-label="Back to top"
+      onClick={() => animateScroll.scrollToTop({ duration: 500, smooth: true })}
+      className={`fixed bottom-6 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-[3px] border border-line-strong bg-raised text-ink shadow-[3px_3px_0_var(--accent-soft)] transition-[opacity,transform,border-color] duration-200 ease-snap hover:border-ink ${
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-2 opacity-0"
+      }`}
+    >
+      <FontAwesomeIcon icon={faAngleUp} />
+    </button>
   );
 };
 

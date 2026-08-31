@@ -1,49 +1,52 @@
+import Section from "../ui/Section";
+import Container from "../ui/Container";
+import Kicker from "../ui/Kicker";
+import Reveal from "../ui/Reveal";
 import Roles from "./Roles";
 
 const rolesData = [
   {
-    id: 1,
+    id: "01",
     title: "AI Engineering",
     description:
-      "Designing and deploying intelligent systems using LLMs, AI agents, and modern machine learning pipelines.",
+      "LLM application design, evaluation, and deployment — from prompt architecture and guardrails to a production rollout.",
   },
   {
-    id: 2,
+    id: "02",
     title: "RAG & LLM Pipelines",
     description:
-      "Building retrieval-augmented generation solutions for document intelligence, search, and question answering.",
+      "Retrieval systems, embeddings, and grounded generation over your own data, with the eval harness to keep it honest.",
   },
   {
-    id: 3,
+    id: "03",
     title: "n8n Automation Workflows",
     description:
-      "Developing scalable n8n workflows that automate business processes and integrate AI with APIs and tools.",
+      "Agentic and event-driven automation that connects your tools and removes the manual steps between them.",
   },
 ];
 
-const Profession = () => {
-  return (
-    <section
-      id="services"
-      className="bg-white py-24 mt-24"   // 👈 SECTION SHIFTED DOWN
-    >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Side */}
-        <div className="flex flex-col justify-center text-center md:text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#001f3f]">
-            What I Do
-          </h2>
-        </div>
-        {/* Right Side – Cards */}
-        <div className="flex flex-col gap-5">
-          {rolesData.map((role) => (
-            <Roles key={role.id} role={role} />
-          ))}
-        </div>
+const Profession = () => (
+  <Section id="services" alt>
+    <Container>
+      <Reveal className="mb-12 flex max-w-2xl flex-col gap-4">
+        <Kicker>What I do</Kicker>
+        <h2 className="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
+          Services
+        </h2>
+        <p className="text-sm text-ink-soft">
+          Focused engagements around building and shipping AI features.
+        </p>
+      </Reveal>
+
+      <div className="grid overflow-hidden rounded-[4px] border border-line sm:grid-cols-3">
+        {rolesData.map((role, i) => (
+          <Reveal key={role.id} delay={i * 60}>
+            <Roles role={role} last={i === rolesData.length - 1} />
+          </Reveal>
+        ))}
       </div>
-    </section>
-  );
-};
+    </Container>
+  </Section>
+);
 
 export default Profession;

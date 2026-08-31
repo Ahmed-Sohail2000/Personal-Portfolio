@@ -44,3 +44,6 @@ build/
 # IDE / Editor files
 .vscode/
 .idea/
+
+# Claude Design canvas working files (not part of the site build)
+design/

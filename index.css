@@ -1,56 +1,148 @@
 @import "tailwindcss";
-@plugin "daisyui";
-@plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
-}
 
-* {
-  transition-property: all;
-  transition-timing-function: var(
-    --tw-ease,
-    var(--default-transition-timing-function)
-  );
-  transition-duration: var(--tw-duration, var(--default-transition-duration));
-  --tw-duration: 200ms;
-  transition-duration: 200ms;
+/* Dark mode driven by [data-theme="dark"] on <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Semantic tokens -> Tailwind utilities (bg-surface, text-ink, border-line, ...) */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-raised: var(--raised);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
 }
 
 @theme {
-  --breakpoint-xxs: 21.25rem; /* COMMENT: 340px */
-  --breakpoint-xs: 23.125rem; /* COMMENT: 363px */
-  --breakpoint-xxl: 82.5rem; /* COMMENT: 1320px */
-  --color-picto-primary: #9929fb;
-  --color-picto-primary-dark: #650fa0;
-  --color-soft-white: #f0f1f3;
-  --color-soft-dark: #87909d;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease-snap: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.btn-primary {
-  @apply bg-picto-primary border-0 text-white hover:scale-[102%] hover:bg-picto-primary-dark transition-all duration-500;
+/* Light (default) */
+:root {
+  --surface: #fcfbf9;
+  --surface-alt: #f1efea;
+  --raised: #ffffff;
+  --ink: #1b1e27;
+  --ink-soft: #565a63;
+  --ink-muted: #8b8f98;
+  --line: rgba(27, 30, 39, 0.12);
+  --line-strong: rgba(27, 30, 39, 0.26);
+  --accent: #e7503a;
+  --accent-soft: rgba(231, 80, 58, 0.1);
+  color-scheme: light;
+}
+
+/* Dark (token swap) */
+[data-theme="dark"] {
+  --surface: #12141a;
+  --surface-alt: #181b22;
+  --raised: #1f232c;
+  --ink: #ecece8;
+  --ink-soft: #a7abb3;
+  --ink-muted: #767a83;
+  --line: rgba(236, 236, 232, 0.14);
+  --line-strong: rgba(236, 236, 232, 0.3);
+  --accent: #ff6a52;
+  --accent-soft: rgba(255, 106, 82, 0.14);
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Work Sans", sans-serif;
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--surface);
+  color: var(--ink);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.content {
-  @apply max-xxl:w-full xxl:max-w-[1320px] xxl:mx-auto;
+/* Visible focus for keyboard users */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
-.section-title {
-  @apply md:font-semibold text-3xl sm:text-4xl md:text-5xl font-medium;
+/* Entrance + accent motions */
+/* Transform-only: if the animation is ever throttled and never runs, content
+   still resolves visible (just slightly offset) rather than stuck hidden. */
+@keyframes rise {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-.center {
-  @apply flex justify-center items-center;
+/* Content is visible by default; .is-in adds a subtle rise on scroll-in. */
+.reveal {
+  opacity: 1;
+}
+.reveal:not(.is-in) {
+  transform: translateY(16px);
+}
+.reveal.is-in {
+  animation: rise 0.55s var(--ease-snap) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal:not(.is-in) {
+    transform: none;
+  }
 }
 
-/* ✅ Changed gradient to pure white */
-.introduction-profile-background {
-  background-color: #ffffff;
+.accent-bar {
+  animation: grow-x 0.7s var(--ease-snap) 0.2s both;
 }
 
-/* ✅ Changed gradient to pure white */
-.blog-background {
-  background-color: #ffffff;
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+@media (hover: hover) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+  }
 }

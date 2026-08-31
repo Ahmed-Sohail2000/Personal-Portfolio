@@ -1,49 +1,23 @@
 import Introduction from "../components/introduction/Introduction";
+import Marquee from "../components/ui/Marquee";
 import Profile from "../components/profile/Profile";
-import Projects from "../components/projects/Projects";
-import WorkTogether from "../components/workTogether/WorkTogether";
 import Profession from "../components/profession/Profession";
+import Projects from "../components/projects/Projects";
 import Testimonial from "../components/testimonial/Testimonial";
+import WorkTogether from "../components/workTogether/WorkTogether";
 import Contact from "../components/contact/Contact";
-import "../../index.css";
 
-const Home = () => {
-  return (
-    <div className="relative bg-white text-[#0b1f4b]">
-      {/* Intro + Profile */}
-      <div className="introduction-profile-background">
-        <div className="content">
-          <Introduction />
-          <Profile />
-        </div>
-      </div>
-
-      {/* Profession */}
-      <div className="bg-[#f5f7fa]">
-        <Profession />
-      </div>
-
-      {/* Projects */}
-      <div className="bg-white">
-        <Projects />
-      </div>
-
-      {/* Social Proof */}
-      <div className="bg-white">
-        <Testimonial />
-      </div>
-
-      {/* Work Together */}
-      <div className="bg-[#0b1f4b] text-white">
-        <WorkTogether />
-      </div>
-
-      {/* Contact */}
-      <div className="bg-[#0b1f4b] text-white">
-        <Contact />
-      </div>
-    </div>
-  );
-};
+const Home = () => (
+  <>
+    <Introduction />
+    <Marquee />
+    <Profile />
+    <Profession />
+    <Projects />
+    <Testimonial />
+    <WorkTogether />
+    <Contact />
+  </>
+);
 
 export default Home;

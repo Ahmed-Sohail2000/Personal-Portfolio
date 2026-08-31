@@ -1,32 +1,17 @@
-import { useState } from "react";
-
-const Roles = ({ role }) => {
-  const [mouseHover, setMouseHover] = useState(false);
-
-  return (
-    <div
-      onMouseEnter={() => setMouseHover(true)}
-      onMouseLeave={() => setMouseHover(false)}
-      className="relative p-6 bg-[#001f3f] rounded-xl my-2 flex overflow-hidden shadow-md transition-transform hover:scale-105"
-    >
-      {/* Hover bar */}
-      <div
-        className={`bg-white-900 absolute left-0 top-0 h-full transition-all duration-300 ${
-          mouseHover ? "w-1" : "w-0"
-        }`}
-      />
-
-      {/* Content */}
-      <div className="ms-3">
-        <p className="text-lg font-semibold text-white pb-1">
-          {role?.title}
-        </p>
-        <p className="text-sm text-white">
-          {role?.description}
-        </p>
-      </div>
-    </div>
-  );
-};
+const Roles = ({ role, last = false }) => (
+  <div
+    className={`h-full bg-raised p-7 transition-colors duration-150 ease-snap hover:bg-surface-alt ${
+      last ? "" : "border-b border-line sm:border-b-0 sm:border-r"
+    }`}
+  >
+    <span className="font-mono text-xs text-accent">{role.id}</span>
+    <h3 className="mt-4 font-display text-lg font-semibold text-ink">
+      {role.title}
+    </h3>
+    <p className="mt-2.5 text-sm leading-relaxed text-ink-soft">
+      {role.description}
+    </p>
+  </div>
+);
 
 export default Roles;
